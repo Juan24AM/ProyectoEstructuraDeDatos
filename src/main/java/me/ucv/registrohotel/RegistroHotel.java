@@ -4,6 +4,8 @@
 
 package me.ucv.registrohotel;
 
+import me.ucv.registrohotel.interfaz.Acceder;
+
 /**
  *
  * @author Daysuke
@@ -11,6 +13,8 @@ package me.ucv.registrohotel;
 public class RegistroHotel {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Acceder login = new Acceder();
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
 }
