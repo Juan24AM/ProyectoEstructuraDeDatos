@@ -15,6 +15,6 @@ public class RegistroHotel {
     public static void main(String[] args) {
         Acceder login = new Acceder();
         login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        login.setLocationRelativeTo(null);  //test
     }
 }
