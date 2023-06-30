@@ -8,7 +8,7 @@ import me.ucv.registrohotel.interfaz.Acceder;
 
 /**
  *
- * @author yo - Juan, XD HOLA aeiou
+ * @author yo - Juan, XD HOLA aeiou jajajaj
  */
 public class RegistroHotel {
 
