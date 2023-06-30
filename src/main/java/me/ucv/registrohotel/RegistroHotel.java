@@ -8,14 +8,13 @@ import me.ucv.registrohotel.interfaz.Acceder;
 
 /**
  *
- * @author yo - Juan, XD HOLA aeiou jajajaj
+ * @author Shande
  */
 public class RegistroHotel {
 
     public static void main(String[] args) {
         Acceder login = new Acceder();
         login.setVisible(true);
-        login.setLocationRelativeTo(null); 
         login.setLocationRelativeTo(null);  //test
     }
 }
