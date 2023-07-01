@@ -19,9 +19,9 @@ import java.util.List;
 public class CallSQL {
     private Connection connection;
     private String url = "jdbc:mysql://gcp.connect.psdb.cloud/hotel?sslMode=VERIFY_IDENTITY";
-    private String username = "grfbbme2i28mtobj8v94";
+    private String username = "10jhxx0k9gfveprtyapz";
     final String driver = "com.mysql.cj.jdbc.Driver";
-    private String password = "pscale_pw_UCR2shnEJUW9sCUaNTfMaxmXmYBp1RmCiMkahy8Hvfg";
+    private String password = "pscale_pw_FVDB7wiRPNdYxRAeRdkXBkIvOt3yhsZNFKko6uWYScE";
 
     public CallSQL() {
         try {
@@ -104,6 +104,23 @@ public class CallSQL {
         }
         return registros;
     }
+
+    public void eliminarRegistroPorDNI(String dni) {
+        String sql = "DELETE FROM registros_hotel WHERE dni = ?";
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://gcp.connect.psdb.cloud/hotel?sslMode=VERIFY_IDENTITY", "10jhxx0k9gfveprtyapz", "pscale_pw_FVDB7wiRPNdYxRAeRdkXBkIvOt3yhsZNFKko6uWYScE");
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, dni);
+            stmt.executeUpdate();
+
+            System.out.println("Registro eliminado exitosamente.");
+
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar el registro: " + e.getMessage());
+        }
+    }
+
 
     public class Registro {
         private int id;
