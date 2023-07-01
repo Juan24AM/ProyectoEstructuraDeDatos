@@ -1,5 +1,5 @@
 
-package me.ucv.registrohotel.backend;
+package backend;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ public class testeoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String dni = "6217192";
+        String dni = "66";
 
         ApiClient apiClient = new ApiClient(dni);
         
