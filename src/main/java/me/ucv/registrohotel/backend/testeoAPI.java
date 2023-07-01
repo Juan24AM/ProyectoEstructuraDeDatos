@@ -10,7 +10,7 @@ public class testeoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String dni = "73186544";
+        String dni = "44444444";
 
         ApiClient apiClient = new ApiClient();
         apiClient.buscarPorDNI(dni);
