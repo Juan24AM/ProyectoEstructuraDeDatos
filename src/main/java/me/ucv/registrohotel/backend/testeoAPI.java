@@ -10,16 +10,20 @@ public class testeoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String dni = "73186544";
+        String dni = "44444444";
 
         ApiClient apiClient = new ApiClient(dni);
-       
+        
+        String coRespuesta = apiClient.getRespuesta();
         String nombre = apiClient.getNombre();
         String paterno = apiClient.getPaterno();
         String materno = apiClient.getMaterno();
+        String sexo = apiClient.getSexo();
         int edad = apiClient.getNuEdad();
         
-        System.out.println(nombre + " " + paterno + " " + materno + " " + edad);
+        System.out.println("NOMBRE: " + nombre + " " + paterno + " " + materno + "\n" + 
+                "EDAD: "+ edad + "\n" + 
+                "SEXO: " + sexo);
     }
     
 }
