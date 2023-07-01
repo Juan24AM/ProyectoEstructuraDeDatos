@@ -27,11 +27,13 @@ public class ApiClient {
 
     // Métodos
     public String getRespuesta() {
-        return nombre;
+        return respuesta;
     }
+    
     public void setRespuesta(String respuesta) {
         this.respuesta = respuesta;
     }
+    
     public String getNombre() {
         return nombre;
     }
@@ -96,16 +98,16 @@ public class ApiClient {
           
             JSONObject jsonObject = new JSONObject(response.toString());
             String coRespuesta = jsonObject.getString("coRespuesta");
-            String apePaterno = jsonObject.getString("apePaterno");
-            String apeMaterno = jsonObject.getString("apeMaterno");
-            String preNombres = jsonObject.getString("preNombres");
-            String Sexo = jsonObject.getString("sexo");
-            int edad = jsonObject.getInt("nuEdad");
             setRespuesta(coRespuesta);
-            setNombre(apePaterno);
-            setPaterno(apeMaterno);
-            setMaterno(preNombres);
+            String apePaterno = jsonObject.getString("apePaterno"); 
+            setPaterno(apePaterno);
+            String apeMaterno = jsonObject.getString("apeMaterno");
+            setMaterno(apeMaterno);
+            String preNombres = jsonObject.getString("preNombres");
+            setNombre(preNombres);
+            String Sexo = jsonObject.getString("sexo");
             setSexo(Sexo);
+            int edad = jsonObject.getInt("nuEdad");
             setNuEdad(edad);
             
         } catch (IOException e) {
