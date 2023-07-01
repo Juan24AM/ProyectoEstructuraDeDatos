@@ -1,4 +1,4 @@
-package me.ucv.registrohotel.backend;
+package backend;
 
 import java.io.IOException; // Libreria para controlar excepciones
 import java.net.HttpURLConnection; // Libreria para controlar realizar peticiones
