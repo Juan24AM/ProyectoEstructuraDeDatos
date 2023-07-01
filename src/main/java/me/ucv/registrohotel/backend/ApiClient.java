@@ -8,6 +8,7 @@ import org.json.JSONObject; // Libreria para manejar la respuesta de la API (jso
 
 public class ApiClient {
     // Atributos
+    private String dni;
     private String respuesta;
     private String nombre;
     private String paterno;
@@ -16,13 +17,14 @@ public class ApiClient {
     private int nuEdad;
 
     // Constructor
-    public ApiClient() {
-        respuesta = "9999";
-        nombre = null;
-        paterno = null;
-        materno = null;
-        sexo = null;
-        nuEdad = 0;
+    public ApiClient(String dni) {
+        this.dni = dni;
+        // Llamos al metodo a penas se crea la instancia
+        try {
+            buscarPorDNI();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Métodos
@@ -75,7 +77,7 @@ public class ApiClient {
     }
     
     // Metodo que establece los valores correspondientes a los atributos
-    public void buscarPorDNI(String dni) throws IOException {
+    public void buscarPorDNI() throws IOException {
         String url = "https://hotelconsulta.azurewebsites.net/buscar/" + dni; // Contenamos el numero de DNI con la API
 
         HttpURLConnection conn = null; // Se inicializa una variables para realizar la conexion en null

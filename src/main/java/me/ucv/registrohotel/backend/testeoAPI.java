@@ -10,10 +10,10 @@ public class testeoAPI {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String dni = "44444444";
+        String dni = "73186544";
 
-        ApiClient apiClient = new ApiClient();
-        apiClient.buscarPorDNI(dni);
+        ApiClient apiClient = new ApiClient(dni);
+       
         String nombre = apiClient.getNombre();
         String paterno = apiClient.getPaterno();
         String materno = apiClient.getMaterno();
