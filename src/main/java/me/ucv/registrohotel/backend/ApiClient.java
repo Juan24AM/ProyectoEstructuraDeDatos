@@ -9,7 +9,7 @@ import org.json.JSONObject; // Libreria para manejar la respuesta de la API (jso
 public class ApiClient {
     // Atributos
     private String dni;
-    private String respuesta;
+    private String respuesta = "9999";
     private String nombre;
     private String paterno;
     private String materno;
@@ -100,17 +100,19 @@ public class ApiClient {
           
             JSONObject jsonObject = new JSONObject(response.toString());
             String coRespuesta = jsonObject.getString("coRespuesta");
-            setRespuesta(coRespuesta);
-            String apePaterno = jsonObject.getString("apePaterno"); 
-            setPaterno(apePaterno);
-            String apeMaterno = jsonObject.getString("apeMaterno");
-            setMaterno(apeMaterno);
-            String preNombres = jsonObject.getString("preNombres");
-            setNombre(preNombres);
-            String Sexo = jsonObject.getString("sexo");
-            setSexo(Sexo);
-            int edad = jsonObject.getInt("nuEdad");
-            setNuEdad(edad);
+            if (coRespuesta.equals("0000")){
+                setRespuesta(coRespuesta);
+                String apePaterno = jsonObject.getString("apePaterno"); 
+                setPaterno(apePaterno);
+                String apeMaterno = jsonObject.getString("apeMaterno");
+                setMaterno(apeMaterno);
+                String preNombres = jsonObject.getString("preNombres");
+                setNombre(preNombres);
+                String Sexo = jsonObject.getString("sexo");
+                setSexo(Sexo);
+                int edad = jsonObject.getInt("nuEdad");
+                setNuEdad(edad);
+            }
             
         } catch (IOException e) {
             throw e;
