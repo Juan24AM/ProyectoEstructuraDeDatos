@@ -5,6 +5,7 @@
 package registrohotel;
 
 import Interfaces.Acceder;
+import backend.SQL;
 
 /**
  *
@@ -13,7 +14,7 @@ import Interfaces.Acceder;
 public class RegistroHotel {
 
     public static void main(String[] args) {
-        Acceder login = new Acceder();
+        SQL login = new SQL();
         login.setVisible(true);
         login.setLocationRelativeTo(null);  //test
     }
