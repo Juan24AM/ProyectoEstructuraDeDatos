@@ -19,7 +19,7 @@ public class ApiClient {
     // Constructor
     public ApiClient(String dni) {
         this.dni = dni;
-        // Llamos al metodo a penas se crea la instancia
+        // Llamos al metodo apenas se crea la instancia
         try {
             buscarPorDNI();
         } catch (IOException e) {
@@ -94,13 +94,15 @@ public class ApiClient {
             scanner = new Scanner(conn.getInputStream());
             StringBuilder response = new StringBuilder();
             
+            // Se recorre la respuesta de la api y con el metodo append vamos agregando linea la respuesta a la varaiable response
             while (scanner.hasNextLine()) {
                 response.append(scanner.nextLine());
             }
-          
+            
+            // Se crea un objeto json a partir del response
             JSONObject jsonObject = new JSONObject(response.toString());
-            String coRespuesta = jsonObject.getString("coRespuesta");
-            if (coRespuesta.equals("0000")){
+            String coRespuesta = jsonObject.getString("coRespuesta"); // Se busca la key coRespuesta y se obtiene el valor
+            if (coRespuesta.equals("0000")){ // Si la respuesta es 0000, es decir, es correcta, se obtiene los demas valores
                 setRespuesta(coRespuesta);
                 String apePaterno = jsonObject.getString("apePaterno"); 
                 setPaterno(apePaterno);
