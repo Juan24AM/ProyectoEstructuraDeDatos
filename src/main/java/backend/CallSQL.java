@@ -18,13 +18,15 @@ import java.util.List;
  */
 public class CallSQL {
     private Connection connection;
-    private String url = "jdbc:mysql://aws.connect.psdb.cloud/hotel?sslMode=VERIFY_IDENTITY";
-    private String username = "ecnl12bzh2vxf3y07bp7";
-    final String driver = "com.mysql.cj.jdbc.Driver";
-    private String password = "pscale_pw_luNaqSifR793SLt9OK5j6SWipi8TntBf5mnpLYJVK9W";
+    private String ip = "194.156.91.77";
+    private int port = 3306;
+    private String database = "registros_hotel";
+    private String username = "hotel";
+    private String password = "admin@hotel";
 
     public CallSQL() {
         try {
+            String url = "jdbc:mysql://" + ip + ":" + port + "/" + database;
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +110,7 @@ public class CallSQL {
     public void eliminarRegistroPorDNI(String dni) {
         String sql = "DELETE FROM registros_hotel WHERE dni = ?";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://gcp.connect.psdb.cloud/hotel?sslMode=VERIFY_IDENTITY", "10wklx74vv0h6qmco0z6", "pscale_pw_CdpFHZPk4IaOb11eGbLQYKIkLAHNBk7fB2xk2SIcofp");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://194.156.91.77:3306/registros_hotel", "hotel", "admin@hotel");
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, dni);
