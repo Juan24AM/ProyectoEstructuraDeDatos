@@ -41,8 +41,8 @@ public class Admin extends javax.swing.JFrame {
         } 
     }
     void agregarRegistro() {
-        String nombre = jtxtnom.getText();
-        String apellidos = jtxtape.getText();
+        String nombre = jtxtnom.getText().toUpperCase();
+        String apellidos = jtxtape.getText().toUpperCase();
         String dni = jtDni.getText();
         String ingreso = jtIngreso.getText();
         String salida = jtSalida.getText();
@@ -55,7 +55,7 @@ public class Admin extends javax.swing.JFrame {
                 // Manejo del caso cuando el campo está vacío, por ejemplo, asignar un valor predeterminado
                  pago = 0.0;
 }
-        String descripcion = jtDes.getText();
+        String descripcion = jtDes.getText().toUpperCase();
 
         registroHotel.agregarRegistro(nombre, apellidos, dni, ingreso, salida, pago, descripcion);
         // Recargar registros
