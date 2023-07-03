@@ -11,6 +11,26 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>me.ucv.registrohotel.RegistroHotel</exec.mainClass>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>me.ucv.registrohotel.RegistroHotel</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.netbeans.external/AbsoluteLayout -->
         <dependency>
@@ -36,4 +56,5 @@
             <version>20210307</version>
         </dependency>
     </dependencies>
+
 </project>
