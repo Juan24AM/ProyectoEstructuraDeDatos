@@ -11,21 +11,18 @@ public class testeoAPI {
      */
     public static void main(String[] args) throws IOException {
         
-        String dni = "62490664";
+        String dni = "44444444";
         
-        ApiClient apiClient = new ApiClient(dni);
+        // ApiClient apiClient = new ApiClient(dni);
+        ApiClienteV2 apiClient = new ApiClienteV2(dni);
         
         String coRespuesta = apiClient.getRespuesta();
         if (coRespuesta.equals("0000")) {
             String nombre = apiClient.getNombre();
             String paterno = apiClient.getPaterno();
             String materno = apiClient.getMaterno();
-            String sexo = apiClient.getSexo();
-            int edad = apiClient.getNuEdad();
 
-            System.out.println("NOMBRE: " + nombre + " " + paterno + " " + materno + "\n" + 
-                    "EDAD: "+ edad + "\n" + 
-                    "SEXO: " + sexo);
+            System.out.println("NOMBRE: " + nombre + " " + paterno + " " + materno + "\n");
         } else 
             System.out.println("Por favor verifique el DNI");
         

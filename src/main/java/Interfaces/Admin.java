@@ -5,6 +5,7 @@
 package Interfaces;
 
 import backend.CallSQL;
+import backend.ApiClienteV2;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -124,6 +125,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jtPago = new javax.swing.JTextField();
         jbRellenar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaSalida = new javax.swing.JTable();
@@ -178,7 +180,7 @@ public class Admin extends javax.swing.JFrame {
                 jtxtapeActionPerformed(evt);
             }
         });
-        jPanel5.add(jtxtape, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 127, 250, 20));
+        jPanel5.add(jtxtape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 250, 20));
 
         jtDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtDes.setForeground(new java.awt.Color(102, 102, 102));
@@ -192,12 +194,12 @@ public class Admin extends javax.swing.JFrame {
         jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 250, 20));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel9.setText("DNI o CE:");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 165, -1, -1));
+        jLabel9.setText("DNI:");
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel8.setText("Apellidos:");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 127, -1, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jtxtnom.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtxtnom.setForeground(new java.awt.Color(102, 102, 102));
@@ -208,11 +210,11 @@ public class Admin extends javax.swing.JFrame {
                 jtxtnomActionPerformed(evt);
             }
         });
-        jPanel5.add(jtxtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 87, 250, 20));
+        jPanel5.add(jtxtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 250, 20));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Nombres:");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 87, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel15.setText("Salida AAAA-MM-DD");
@@ -258,7 +260,7 @@ public class Admin extends javax.swing.JFrame {
                 jtDniActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 165, 250, 20));
+        jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 140, 30));
 
         jtIngreso.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtIngreso.setForeground(new java.awt.Color(102, 102, 102));
@@ -308,6 +310,14 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jbRellenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, -1, -1));
+
+        jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 600));
 
@@ -457,6 +467,39 @@ public class Admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String dni = jtDni.getText();
+        if (dni.length() >= 8 && dni.length() <= 11 && dni != ""){
+            ApiClienteV2 apiClient = new ApiClienteV2(dni);
+            String coRespuesta = apiClient.getRespuesta();
+            if (coRespuesta.equals("0000")) {
+                String nombre = apiClient.getNombre();
+                String paterno = apiClient.getPaterno();
+                String materno = apiClient.getMaterno();
+
+                jtxtnom.setText(nombre);
+                jtxtape.setText(paterno + " " + materno);
+                jtxtnom.setEnabled(false);
+                jtxtape.setEnabled(false);
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Porfavor verifica el DNI, si el problema persiste, ingresa tus datos de forma manual.");
+                jtxtnom.setText("");
+                jtxtape.setText("");
+                jtxtnom.setEnabled(true);
+                jtxtape.setEnabled(true);
+            }
+                
+        } else {
+            JOptionPane.showMessageDialog(this, "Porfavor verifica que el dato este ingresado correctamente.");
+            jtxtnom.setText("");
+            jtxtape.setText("");
+            jtxtnom.setEnabled(true);
+            jtxtape.setEnabled(true);
+        }
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -498,6 +541,7 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
