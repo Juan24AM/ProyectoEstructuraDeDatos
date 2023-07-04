@@ -479,8 +479,6 @@ public class Admin extends javax.swing.JFrame {
             jtxtnom.setEnabled(true);
             jtxtape.setEnabled(true);
         }
-        
-        System.out.println();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
