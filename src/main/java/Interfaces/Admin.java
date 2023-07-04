@@ -6,6 +6,7 @@ package Interfaces;
 
 import backend.CallSQL;
 import backend.ApiClienteV2;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -22,7 +23,8 @@ public class Admin extends javax.swing.JFrame {
     DefaultTableModel miModelo;
     String[] cabecera={"ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "PAGO", "DESCRIPCIÓN"};
     String[][] data={};
-
+    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+    
     /**
      * Creates new form Admin
      */
@@ -45,8 +47,8 @@ public class Admin extends javax.swing.JFrame {
         String nombre = jtxtnom.getText().toUpperCase();
         String apellidos = jtxtape.getText().toUpperCase();
         String dni = jtDni.getText();
-        String ingreso = jtIngreso.getText();
-        String salida = jtSalida.getText();
+        String ingreso = formato.format(jDateFechaIngreso.getDate());
+        String salida = formato.format(jDateFechaSalida.getDate());
         String pagoText = jtPago.getText();
         double pago;
 
@@ -119,13 +121,13 @@ public class Admin extends javax.swing.JFrame {
         jbr = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jtDni = new javax.swing.JTextField();
-        jtIngreso = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jtSalida = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jtPago = new javax.swing.JTextField();
         jbRellenar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jDateFechaSalida = new com.toedter.calendar.JDateChooser();
+        jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaSalida = new javax.swing.JTable();
@@ -191,7 +193,7 @@ public class Admin extends javax.swing.JFrame {
                 jtDesActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 250, 20));
+        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 250, 20));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setText("DNI:");
@@ -262,35 +264,13 @@ public class Admin extends javax.swing.JFrame {
         });
         jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 140, 30));
 
-        jtIngreso.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jtIngreso.setForeground(new java.awt.Color(102, 102, 102));
-        jtIngreso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtIngreso.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jtIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIngresoActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jtIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 180, 20));
-
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel14.setText("T. Pago");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
-
-        jtSalida.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jtSalida.setForeground(new java.awt.Color(102, 102, 102));
-        jtSalida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtSalida.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jtSalida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtSalidaActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jtSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 180, 20));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel16.setText("Descripción");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, -1, -1));
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jtPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtPago.setForeground(new java.awt.Color(102, 102, 102));
@@ -301,7 +281,7 @@ public class Admin extends javax.swing.JFrame {
                 jtPagoActionPerformed(evt);
             }
         });
-        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 250, 20));
+        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 250, 20));
 
         jbRellenar.setText("RELLENAR");
         jbRellenar.addActionListener(new java.awt.event.ActionListener() {
@@ -318,6 +298,16 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+
+        jDateFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
+        jDateFechaSalida.setForeground(new java.awt.Color(0, 153, 153));
+        jDateFechaSalida.setDateFormatString("dd/MM/yyyy");
+        jPanel5.add(jDateFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 150, 30));
+
+        jDateFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
+        jDateFechaIngreso.setForeground(new java.awt.Color(0, 153, 153));
+        jDateFechaIngreso.setDateFormatString("dd/MM/yyyy");
+        jPanel5.add(jDateFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 30));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 600));
 
@@ -402,8 +392,7 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbrActionPerformed
-        // TODO add your handling code here:
-        
+
         agregarRegistro();
     }//GEN-LAST:event_jbrActionPerformed
 
@@ -413,11 +402,12 @@ public class Admin extends javax.swing.JFrame {
         jtxtnom.setText("");
         jtxtape.setText("");
         jtDni.setText("");
-        jtIngreso.setText("");
-        jtSalida.setText("");
+        jDateFechaSalida.setDate(null);
+        jDateFechaIngreso.setDate(null);
         jtPago.setText("");
         jtDes.setText("");
-
+        jtxtnom.setEnabled(true);
+        jtxtape.setEnabled(true);
     }//GEN-LAST:event_jblActionPerformed
 
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
@@ -443,14 +433,6 @@ public class Admin extends javax.swing.JFrame {
     private void jtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDniActionPerformed
-
-    private void jtIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIngresoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtIngresoActionPerformed
-
-    private void jtSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSalidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtSalidaActionPerformed
 
     private void jtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPagoActionPerformed
         // TODO add your handling code here:
@@ -497,7 +479,8 @@ public class Admin extends javax.swing.JFrame {
             jtxtnom.setEnabled(true);
             jtxtape.setEnabled(true);
         }
-            
+        
+        System.out.println();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -542,6 +525,8 @@ public class Admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateFechaIngreso;
+    private com.toedter.calendar.JDateChooser jDateFechaSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -573,9 +558,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtFiltrarApellido;
     private javax.swing.JTextField jtFiltrarNombre;
-    private javax.swing.JTextField jtIngreso;
     private javax.swing.JTextField jtPago;
-    private javax.swing.JTextField jtSalida;
     private javax.swing.JTable jtaSalida;
     private javax.swing.JTextField jtxtape;
     private javax.swing.JTextField jtxtnom;
