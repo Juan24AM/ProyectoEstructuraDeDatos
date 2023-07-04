@@ -21,7 +21,7 @@ public class Admin extends javax.swing.JFrame {
     
     //Declaración del formato de la tabla
     DefaultTableModel miModelo;
-    String[] cabecera={"ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "PAGO", "DESCRIPCIÓN"};
+    String[] cabecera={"ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "PAGO", "DESCRIPCIÓN", "Nº HABTACIÓN"};
     String[][] data={};
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
     
@@ -51,6 +51,7 @@ public class Admin extends javax.swing.JFrame {
         String salida = formato.format(jDateFechaSalida.getDate());
         String pagoText = jtPago.getText();
         double pago;
+        String habitacion = jtHabitacion.getText();
 
         if (!pagoText.isEmpty()) {
             pago = Double.parseDouble(pagoText);
@@ -60,7 +61,7 @@ public class Admin extends javax.swing.JFrame {
 }
         String descripcion = jtDes.getText().toUpperCase();
 
-        registroHotel.agregarRegistro(nombre, apellidos, dni, ingreso, salida, pago, descripcion);
+        registroHotel.agregarRegistro(nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion);
         // Recargar registros
         cargarRegistros();
     }
@@ -85,7 +86,8 @@ public class Admin extends javax.swing.JFrame {
                     registro.getIngreso(),
                     registro.getSalida(),
                     registro.getPago(),
-                    registro.getDescripcion()
+                    registro.getDescripcion(),
+                    registro.getHabitacion()
             });
         }
     }
@@ -100,6 +102,7 @@ public class Admin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel12 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -109,7 +112,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jtxtape = new javax.swing.JTextField();
-        jtDes = new javax.swing.JTextField();
+        jtHabitacion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jtxtnom = new javax.swing.JTextField();
@@ -124,10 +127,11 @@ public class Admin extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jtPago = new javax.swing.JTextField();
-        jbRellenar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jDateFechaSalida = new com.toedter.calendar.JDateChooser();
         jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
+        jLabel17 = new javax.swing.JLabel();
+        jtDes = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaSalida = new javax.swing.JTable();
@@ -138,6 +142,8 @@ public class Admin extends javax.swing.JFrame {
         jtFiltrarNombre = new javax.swing.JTextField();
         jtFiltrarApellido = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+
+        jLabel12.setText("jLabel12");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -184,16 +190,16 @@ public class Admin extends javax.swing.JFrame {
         });
         jPanel5.add(jtxtape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 250, 20));
 
-        jtDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jtDes.setForeground(new java.awt.Color(102, 102, 102));
-        jtDes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtDes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jtDes.addActionListener(new java.awt.event.ActionListener() {
+        jtHabitacion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jtHabitacion.setForeground(new java.awt.Color(102, 102, 102));
+        jtHabitacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtHabitacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        jtHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtDesActionPerformed(evt);
+                jtHabitacionActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 250, 20));
+        jPanel5.add(jtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 250, 20));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setText("DNI:");
@@ -265,7 +271,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 140, 30));
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel14.setText("T. Pago");
+        jLabel14.setText("Pago");
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -282,14 +288,6 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 250, 20));
-
-        jbRellenar.setText("RELLENAR");
-        jbRellenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbRellenarActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jbRellenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, -1, -1));
 
         jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -309,6 +307,21 @@ public class Admin extends javax.swing.JFrame {
         jDateFechaIngreso.setDateFormatString("dd/MM/yyyy");
         jPanel5.add(jDateFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 30));
 
+        jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel17.setText("Nº Habitación");
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+
+        jtDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jtDes.setForeground(new java.awt.Color(102, 102, 102));
+        jtDes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtDes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        jtDes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtDesActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 250, 20));
+
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 600));
 
         jTabbedPane1.addTab("Registro", jPanel1);
@@ -321,13 +334,13 @@ public class Admin extends javax.swing.JFrame {
         jtaSalida.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jtaSalida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "METODO", "PAGO", "DESCRIPCIÓN"
+                "ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "METODO", "PAGO", "DESCRIPCIÓN", "Nº HABTACIÓN"
             }
         ));
         jScrollPane1.setViewportView(jtaSalida);
@@ -405,18 +418,19 @@ public class Admin extends javax.swing.JFrame {
         jDateFechaSalida.setDate(null);
         jDateFechaIngreso.setDate(null);
         jtPago.setText("");
-        jtDes.setText("");
+        jtHabitacion.setText("");
         jtxtnom.setEnabled(true);
         jtxtape.setEnabled(true);
+        jtHabitacion.setText("");
     }//GEN-LAST:event_jblActionPerformed
 
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtnomActionPerformed
 
-    private void jtDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDesActionPerformed
+    private void jtHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtHabitacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtDesActionPerformed
+    }//GEN-LAST:event_jtHabitacionActionPerformed
 
     private void jtxtapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtapeActionPerformed
         // TODO add your handling code here:
@@ -437,10 +451,6 @@ public class Admin extends javax.swing.JFrame {
     private void jtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPagoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPagoActionPerformed
-
-    private void jbRellenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRellenarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbRellenarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
@@ -480,6 +490,10 @@ public class Admin extends javax.swing.JFrame {
             jtxtape.setEnabled(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtDesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -528,10 +542,12 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -549,13 +565,13 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbRellenar;
     private javax.swing.JButton jbl;
     private javax.swing.JButton jbr;
     private javax.swing.JTextField jtDes;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtFiltrarApellido;
     private javax.swing.JTextField jtFiltrarNombre;
+    private javax.swing.JTextField jtHabitacion;
     private javax.swing.JTextField jtPago;
     private javax.swing.JTable jtaSalida;
     private javax.swing.JTextField jtxtape;
