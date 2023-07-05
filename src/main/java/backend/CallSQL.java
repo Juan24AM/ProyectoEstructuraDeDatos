@@ -34,24 +34,24 @@ public class CallSQL {
     }
 
     public void agregarRegistro(String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
-        String query = "INSERT INTO registros_hotel (nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, nombre);
-            statement.setString(2, apellidos);
-            statement.setString(3, dni);
-            statement.setString(4, ingreso);
-            statement.setString(5, salida);
-            statement.setDouble(6, pago);
-            statement.setString(7, descripcion);
-            statement.setString(8, habitacion);
-            statement.setString(9, tipo_cuarto);
-            statement.executeUpdate();
-            System.out.println("Registro agregado correctamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    String query = "INSERT INTO registros_hotel (nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, nombre);
+        statement.setString(2, apellidos);
+        statement.setString(3, dni);
+        statement.setString(4, ingreso);
+        statement.setString(5, salida);
+        statement.setDouble(6, pago);
+        statement.setString(7, descripcion);
+        statement.setString(8, habitacion);
+        statement.setString(9, tipo_cuarto);
+        statement.executeUpdate();
+        System.out.println("Registro agregado correctamente.");
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
 
     public void actualizarRegistro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
         String query = "UPDATE registros_hotel SET nombre = ?, apellidos = ?, dni = ?, ingreso = ?, salida = ?, pago = ?, descripcion = ? , habitacion = ?, tipo_cuarto = ?, WHERE id = ?";
