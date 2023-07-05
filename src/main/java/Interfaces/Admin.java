@@ -588,9 +588,16 @@ public class Admin extends javax.swing.JFrame {
                 long diasTranscurridos = ChronoUnit.DAYS.between(ingreso, salida);
 
                 double pagoTotal = diasTranscurridos * preciiHab;
-
+                
+                String dias = "";
+                
+                if (diasTranscurridos == 1)
+                    dias = " DIA";
+                else
+                    dias = " DIAS";
+                
                 jtPago.setText("S/. " + String.valueOf(pagoTotal));
-                jtDes.setText("TIPO: " + tipHab + ", " + diasTranscurridos + "DIAS, TOTAL = S/. " +  pagoTotal);
+                jtDes.setText("TIPO: " + tipHab + ", " + diasTranscurridos + dias + ", TOTAL = S/. " +  pagoTotal);
             }
         } else if (!tipSelecionado)
             JOptionPane.showMessageDialog(this, "Seleciona el tipo de habitacion.");
