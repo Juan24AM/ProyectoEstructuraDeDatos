@@ -7,6 +7,9 @@ package Interfaces;
 import backend.CallSQL;
 import backend.ApiClienteV2;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -35,6 +38,7 @@ public class Admin extends javax.swing.JFrame {
         miModelo = new DefaultTableModel(data, cabecera);
         jtaSalida.setModel(miModelo);
         cargarRegistros();
+        agregarBotones();
     }
     void vaciar_tabla(){
         int filas=jtaSalida.getRowCount();
@@ -92,6 +96,12 @@ public class Admin extends javax.swing.JFrame {
         }
     }
     
+    void agregarBotones() {
+        buttonTipoCuarto.add(jRadioSencilla);
+        buttonTipoCuarto.add(jRadioDoble);
+        buttonTipoCuarto.add(jRadioSuite);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,6 +113,7 @@ public class Admin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel12 = new javax.swing.JLabel();
+        buttonTipoCuarto = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -132,6 +143,15 @@ public class Admin extends javax.swing.JFrame {
         jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
         jLabel17 = new javax.swing.JLabel();
         jtDes = new javax.swing.JTextField();
+        jRadioSencilla = new javax.swing.JRadioButton();
+        jRadioDoble = new javax.swing.JRadioButton();
+        jRadioSuite = new javax.swing.JRadioButton();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaSalida = new javax.swing.JTable();
@@ -199,7 +219,7 @@ public class Admin extends javax.swing.JFrame {
                 jtHabitacionActionPerformed(evt);
             }
         });
-        jPanel5.add(jtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 250, 20));
+        jPanel5.add(jtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 160, 20));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setText("DNI:");
@@ -272,11 +292,11 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel14.setText("Pago");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel16.setText("Descripción");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
 
         jtPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtPago.setForeground(new java.awt.Color(102, 102, 102));
@@ -287,7 +307,7 @@ public class Admin extends javax.swing.JFrame {
                 jtPagoActionPerformed(evt);
             }
         });
-        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 250, 20));
+        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 250, 20));
 
         jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -309,18 +329,55 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel17.setText("Nº Habitación");
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
         jtDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtDes.setForeground(new java.awt.Color(102, 102, 102));
         jtDes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtDes.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        jtDes.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtDesFocusGained(evt);
+            }
+        });
         jtDes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtDesActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 250, 20));
+        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 250, 20));
+
+        jRadioSencilla.setText("Sencilla");
+        jPanel5.add(jRadioSencilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
+
+        jRadioDoble.setText("Doble");
+        jPanel5.add(jRadioDoble, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+
+        jRadioSuite.setText("Suite");
+        jPanel5.add(jRadioSuite, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 70, -1));
+
+        jLabel18.setText("Tipo Cuarto:");
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        jLabel19.setText("Precio (S/. )");
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+
+        jLabel20.setText("199");
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
+
+        jLabel21.setText("80");
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+
+        jLabel22.setText("120");
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+
+        jButton2.setText("VALIDAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 600));
 
@@ -418,10 +475,11 @@ public class Admin extends javax.swing.JFrame {
         jDateFechaSalida.setDate(null);
         jDateFechaIngreso.setDate(null);
         jtPago.setText("");
+        jtDes.setText("");
         jtHabitacion.setText("");
         jtxtnom.setEnabled(true);
         jtxtape.setEnabled(true);
-        jtHabitacion.setText("");
+        buttonTipoCuarto.clearSelection();
     }//GEN-LAST:event_jblActionPerformed
 
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
@@ -494,6 +552,59 @@ public class Admin extends javax.swing.JFrame {
     private void jtDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDesActionPerformed
+    
+    public void calcularPago() {
+        int preciiHab = 0;
+        String tipHab = "";
+        boolean tipSelecionado = false;
+        Date fechaActual = new Date();
+
+        
+        if (jRadioSencilla.isSelected()) {
+            preciiHab = 80;
+            tipHab = "Sencilla";
+            tipSelecionado = true; 
+        } else if (jRadioDoble.isSelected()){
+            preciiHab = 120;
+            tipHab = "Doble";
+            tipSelecionado = true; 
+        } else if (jRadioSuite.isSelected()) {
+            preciiHab = 199;
+            tipHab = "Suite";
+            tipSelecionado = true; 
+        }
+        
+        if (tipSelecionado && jDateFechaIngreso.getDate() != null && jDateFechaSalida.getDate() != null) {
+            // Se calculan los dias que sera alquildo el cuarto.
+            if (jDateFechaIngreso.getDate().before(fechaActual)){
+                JOptionPane.showMessageDialog(this, "La fecha de ingreso no puede ser anterior a la actual.");
+            } else if (jDateFechaSalida.getDate().before(jDateFechaIngreso.getDate())){
+                JOptionPane.showMessageDialog(this, "La fecha de salida no puede ser anterior a la fecha de ingreso.");
+            } else {
+                String fechaIngreso = formato.format(jDateFechaIngreso.getDate());
+                String fechaSalida = formato.format(jDateFechaSalida.getDate());
+                LocalDate ingreso = LocalDate.parse(fechaIngreso);
+                LocalDate salida = LocalDate.parse(fechaSalida);
+                long diasTranscurridos = ChronoUnit.DAYS.between(ingreso, salida);
+
+                double pagoTotal = diasTranscurridos * preciiHab;
+
+                jtPago.setText("S/. " + String.valueOf(pagoTotal));
+                jtDes.setText("TIPO: " + tipHab + ", " + diasTranscurridos + "DIAS, TOTAL = S/. " +  pagoTotal);
+            }
+        } else if (!tipSelecionado)
+            JOptionPane.showMessageDialog(this, "Seleciona el tipo de habitacion.");
+        else
+            JOptionPane.showMessageDialog(this, "Completa las fechas de ingreso y salida.");
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        calcularPago();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jtDesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDesFocusGained
+        
+    }//GEN-LAST:event_jtDesFocusGained
 
     /**
      * @param args the command line arguments
@@ -536,7 +647,9 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonTipoCuarto;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateFechaIngreso;
     private com.toedter.calendar.JDateChooser jDateFechaSalida;
     private javax.swing.JLabel jLabel1;
@@ -548,7 +661,12 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -560,6 +678,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JRadioButton jRadioDoble;
+    private javax.swing.JRadioButton jRadioSencilla;
+    private javax.swing.JRadioButton jRadioSuite;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jbActualizar;
