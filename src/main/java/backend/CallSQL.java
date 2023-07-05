@@ -33,8 +33,8 @@ public class CallSQL {
         }
     }
 
-    public void agregarRegistro(String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion) {
-        String query = "INSERT INTO registros_hotel (nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void agregarRegistro(String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
+        String query = "INSERT INTO registros_hotel (nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, nombre);
@@ -45,6 +45,7 @@ public class CallSQL {
             statement.setDouble(6, pago);
             statement.setString(7, descripcion);
             statement.setString(8, habitacion);
+            statement.setString(9, tipo_cuarto);
             statement.executeUpdate();
             System.out.println("Registro agregado correctamente.");
         } catch (SQLException e) {
@@ -52,8 +53,8 @@ public class CallSQL {
         }
     }
 
-    public void actualizarRegistro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion) {
-        String query = "UPDATE registros_hotel SET nombre = ?, apellidos = ?, dni = ?, ingreso = ?, salida = ?, pago = ?, descripcion = ? , habitacion = ?, WHERE id = ?";
+    public void actualizarRegistro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
+        String query = "UPDATE registros_hotel SET nombre = ?, apellidos = ?, dni = ?, ingreso = ?, salida = ?, pago = ?, descripcion = ? , habitacion = ?, tipo_cuarto = ?, WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, nombre);
@@ -64,7 +65,8 @@ public class CallSQL {
             statement.setDouble(6, pago);
             statement.setString(7, descripcion);
             statement.setString(8, habitacion);
-            statement.setInt(8, id);
+            statement.setString(9, tipo_cuarto);
+            statement.setInt(10, id);
             statement.executeUpdate();
             System.out.println("Registro actualizado correctamente.");
         } catch (SQLException e) {
@@ -100,8 +102,9 @@ public class CallSQL {
                 double pago = resultSet.getDouble("pago");
                 String descripcion = resultSet.getString("descripcion");
                 String habitacion = resultSet.getString("habitacion");
+                String tipo_cuarto = resultSet.getString("tipo_cuarto");
 
-                Registro registro = new Registro(id, nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion);
+                Registro registro = new Registro(id, nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto);
                 registros.add(registro);
             }
         } catch (SQLException e) {
@@ -137,8 +140,9 @@ public class CallSQL {
         private double pago;
         private String descripcion;
         private String habitacion;
+        private String tipo_cuarto;
 
-        public Registro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion) {
+        public Registro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
             this.id = id;
             this.nombre = nombre;
             this.apellidos = apellidos;
@@ -148,6 +152,7 @@ public class CallSQL {
             this.pago = pago;
             this.descripcion = descripcion;
             this.habitacion = habitacion;
+            this.tipo_cuarto = tipo_cuarto;
         }
 
         // Getters y setters
@@ -223,6 +228,15 @@ public class CallSQL {
         public void setHabitacion(String habitacion) {
             this.habitacion = habitacion;
         }
+
+        public String getTipo_cuarto() {
+            return tipo_cuarto;
+        }
+
+        public void setTipo_cuarto(String tipo_cuarto) {
+            this.tipo_cuarto = tipo_cuarto;
+        }
+        
         
     }
     

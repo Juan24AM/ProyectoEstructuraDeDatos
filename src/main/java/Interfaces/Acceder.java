@@ -152,7 +152,7 @@ public class Acceder extends javax.swing.JFrame {
 
         jPanel2.add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 500));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 500));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

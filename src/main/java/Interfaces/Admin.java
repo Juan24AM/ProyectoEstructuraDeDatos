@@ -6,6 +6,8 @@ package Interfaces;
 
 import backend.CallSQL;
 import backend.ApiClienteV2;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -21,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Admin extends javax.swing.JFrame {
     CallSQL registroHotel;
+    String habitacionSeleccionada;
     
     //Declaración del formato de la tabla
     DefaultTableModel miModelo;
     String[] cabecera={"ID", "NOMBRE", "APELLIDOS", "DNI", "INGRESO", "SALIDA", "PAGO", "DESCRIPCIÓN", "Nº HABTACIÓN"};
     String[][] data={};
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+    
     
     /**
      * Creates new form Admin
@@ -39,7 +43,7 @@ public class Admin extends javax.swing.JFrame {
         jtaSalida.setModel(miModelo);
         cargarRegistros();
         agregarBotones();
-    }
+}
     void vaciar_tabla(){
         int filas=jtaSalida.getRowCount();
         for(int i=0;i<filas;i++){
@@ -54,6 +58,7 @@ public class Admin extends javax.swing.JFrame {
         String ingreso = formato.format(jDateFechaIngreso.getDate());
         String salida = formato.format(jDateFechaSalida.getDate());
         String pagoText = jtPago.getText();
+        String tipo_cuarto = jttipo_cuarto.getText();
         double pago;
         String habitacion = jtHabitacion.getText();
 
@@ -65,10 +70,11 @@ public class Admin extends javax.swing.JFrame {
 }
         String descripcion = jtDes.getText().toUpperCase();
 
-        registroHotel.agregarRegistro(nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion);
+        registroHotel.agregarRegistro(nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto);
         // Recargar registros
         cargarRegistros();
     }
+    
     void eliminarRegistro() {
         String dni = JOptionPane.showInputDialog(this, "Ingrese el DNI del registro a eliminar:");
         if (dni != null && !dni.isEmpty()) {
@@ -97,7 +103,7 @@ public class Admin extends javax.swing.JFrame {
     }
     
     void agregarBotones() {
-        buttonTipoCuarto.add(jRadioSencilla);
+        buttonTipoCuarto.add(jttipo_cuarto);
         buttonTipoCuarto.add(jRadioDoble);
         buttonTipoCuarto.add(jRadioSuite);
     }
@@ -143,7 +149,7 @@ public class Admin extends javax.swing.JFrame {
         jDateFechaIngreso = new com.toedter.calendar.JDateChooser();
         jLabel17 = new javax.swing.JLabel();
         jtDes = new javax.swing.JTextField();
-        jRadioSencilla = new javax.swing.JRadioButton();
+        jttipo_cuarto = new javax.swing.JRadioButton();
         jRadioDoble = new javax.swing.JRadioButton();
         jRadioSuite = new javax.swing.JRadioButton();
         jLabel18 = new javax.swing.JLabel();
@@ -176,8 +182,8 @@ public class Admin extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo-universidad-cesar-vallejo.png"))); // NOI18N
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 190, 190));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 190, 190));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,9 +198,9 @@ public class Admin extends javax.swing.JFrame {
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ah.jpeg"))); // NOI18N
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 600));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 600));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 290, 646));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, -10, 290, 646));
 
         jPanel5.setBackground(new java.awt.Color(204, 153, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -208,7 +214,7 @@ public class Admin extends javax.swing.JFrame {
                 jtxtapeActionPerformed(evt);
             }
         });
-        jPanel5.add(jtxtape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 250, 20));
+        jPanel5.add(jtxtape, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 250, 20));
 
         jtHabitacion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtHabitacion.setForeground(new java.awt.Color(102, 102, 102));
@@ -219,15 +225,15 @@ public class Admin extends javax.swing.JFrame {
                 jtHabitacionActionPerformed(evt);
             }
         });
-        jPanel5.add(jtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 160, 20));
+        jPanel5.add(jtHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 160, 20));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel9.setText("DNI:");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel8.setText("Apellidos:");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         jtxtnom.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtxtnom.setForeground(new java.awt.Color(102, 102, 102));
@@ -238,15 +244,15 @@ public class Admin extends javax.swing.JFrame {
                 jtxtnomActionPerformed(evt);
             }
         });
-        jPanel5.add(jtxtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 250, 20));
+        jPanel5.add(jtxtnom, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, 20));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Nombres:");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel15.setText("Salida AAAA-MM-DD");
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("REGISTRAR CLIENTE");
@@ -263,7 +269,7 @@ public class Admin extends javax.swing.JFrame {
                 jblActionPerformed(evt);
             }
         });
-        jPanel5.add(jbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 490, 133, -1));
+        jPanel5.add(jbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 133, -1));
 
         jbr.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registrarusu.png"))); // NOI18N
@@ -273,11 +279,11 @@ public class Admin extends javax.swing.JFrame {
                 jbrActionPerformed(evt);
             }
         });
-        jPanel5.add(jbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, -1, -1));
+        jPanel5.add(jbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel10.setText("Ingreso AAAA-MM-DD");
-        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         jtDni.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtDni.setForeground(new java.awt.Color(102, 102, 102));
@@ -288,15 +294,15 @@ public class Admin extends javax.swing.JFrame {
                 jtDniActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 140, 30));
+        jPanel5.add(jtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 140, 30));
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel14.setText("Pago");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jLabel14.setText("Ingresar S/.");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel16.setText("Descripción");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, -1, -1));
 
         jtPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtPago.setForeground(new java.awt.Color(102, 102, 102));
@@ -307,7 +313,7 @@ public class Admin extends javax.swing.JFrame {
                 jtPagoActionPerformed(evt);
             }
         });
-        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 250, 20));
+        jPanel5.add(jtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 250, 20));
 
         jButton1.setText("BUSCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -315,21 +321,21 @@ public class Admin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
 
         jDateFechaSalida.setBackground(new java.awt.Color(255, 255, 255));
         jDateFechaSalida.setForeground(new java.awt.Color(0, 153, 153));
         jDateFechaSalida.setDateFormatString("dd/MM/yyyy");
-        jPanel5.add(jDateFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 150, 30));
+        jPanel5.add(jDateFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 150, 30));
 
         jDateFechaIngreso.setBackground(new java.awt.Color(255, 255, 255));
         jDateFechaIngreso.setForeground(new java.awt.Color(0, 153, 153));
         jDateFechaIngreso.setDateFormatString("dd/MM/yyyy");
-        jPanel5.add(jDateFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 30));
+        jPanel5.add(jDateFechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 150, 30));
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel17.setText("Nº Habitación");
-        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, -1, -1));
 
         jtDes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jtDes.setForeground(new java.awt.Color(102, 102, 102));
@@ -345,31 +351,31 @@ public class Admin extends javax.swing.JFrame {
                 jtDesActionPerformed(evt);
             }
         });
-        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 370, 250, 20));
+        jPanel5.add(jtDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 250, 20));
 
-        jRadioSencilla.setText("Sencilla");
-        jPanel5.add(jRadioSencilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
+        jttipo_cuarto.setText("Sencilla");
+        jPanel5.add(jttipo_cuarto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, -1, -1));
 
         jRadioDoble.setText("Doble");
-        jPanel5.add(jRadioDoble, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, -1, -1));
+        jPanel5.add(jRadioDoble, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
 
         jRadioSuite.setText("Suite");
-        jPanel5.add(jRadioSuite, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 70, -1));
+        jPanel5.add(jRadioSuite, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 70, -1));
 
         jLabel18.setText("Tipo Cuarto:");
-        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
 
         jLabel19.setText("Precio (S/. )");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
 
         jLabel20.setText("199");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
 
         jLabel21.setText("80");
-        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, -1, -1));
 
         jLabel22.setText("120");
-        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
         jButton2.setText("VALIDAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -377,9 +383,9 @@ public class Admin extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
+        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 600));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 600));
 
         jTabbedPane1.addTab("Registro", jPanel1);
 
@@ -402,7 +408,7 @@ public class Admin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtaSalida);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 670, 410));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 840, 410));
 
         jbBuscar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
@@ -456,7 +462,7 @@ public class Admin extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Datos", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 627));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -505,10 +511,6 @@ public class Admin extends javax.swing.JFrame {
     private void jtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDniActionPerformed
-
-    private void jtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPagoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtPagoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
@@ -560,7 +562,7 @@ public class Admin extends javax.swing.JFrame {
         Date fechaActual = new Date();
 
         
-        if (jRadioSencilla.isSelected()) {
+        if (jttipo_cuarto.isSelected()) {
             preciiHab = 80;
             tipHab = "Sencilla";
             tipSelecionado = true; 
@@ -612,6 +614,10 @@ public class Admin extends javax.swing.JFrame {
     private void jtDesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDesFocusGained
         
     }//GEN-LAST:event_jtDesFocusGained
+
+    private void jtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtPagoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -686,7 +692,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioDoble;
-    private javax.swing.JRadioButton jRadioSencilla;
     private javax.swing.JRadioButton jRadioSuite;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -702,6 +707,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTextField jtHabitacion;
     private javax.swing.JTextField jtPago;
     private javax.swing.JTable jtaSalida;
+    private javax.swing.JRadioButton jttipo_cuarto;
     private javax.swing.JTextField jtxtape;
     private javax.swing.JTextField jtxtnom;
     // End of variables declaration//GEN-END:variables
