@@ -58,6 +58,7 @@ public class Admin extends javax.swing.JFrame {
         String ingreso = formato.format(jDateFechaIngreso.getDate());
         String salida = formato.format(jDateFechaSalida.getDate());
         String pagoText = jtPago.getText();
+        pagoText = pagoText.replace("S/. ", "");
         String tipo_cuarto = jttipo_cuarto.getText();
         double pago;
         String habitacion = jtHabitacion.getText();
@@ -598,7 +599,7 @@ public class Admin extends javax.swing.JFrame {
                 else
                     dias = " DIAS";
                 
-                jtPago.setText (String.valueOf(pagoTotal));
+                jtPago.setText (String.valueOf("S/. " + pagoTotal));
                 jtDes.setText("TIPO: " + tipHab + ", " + diasTranscurridos + dias + ", TOTAL = S/. " +  pagoTotal);
             }
         } else if (!tipSelecionado)
