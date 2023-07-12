@@ -18,11 +18,11 @@ import java.util.List;
  */
 public class CallSQL {
     private Connection connection;
-    private String ip = "194.156.91.77";
+    private String ip = "194.156.91.214";
     private int port = 3306;
     private String database = "registros_hotel";
-    private String username = "hotel";
-    private String password = "admin@hotel";
+    private String username = "administracion@hotelucv";
+    private String password = "8j0&!Tp21#iO";
 
     public CallSQL() {
         try {
