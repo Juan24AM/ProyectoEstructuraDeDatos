@@ -598,7 +598,7 @@ public class Admin extends javax.swing.JFrame {
                 else
                     dias = " DIAS";
                 
-                jtPago.setText("S/. " + String.valueOf(pagoTotal));
+                jtPago.setText (String.valueOf(pagoTotal));
                 jtDes.setText("TIPO: " + tipHab + ", " + diasTranscurridos + dias + ", TOTAL = S/. " +  pagoTotal);
             }
         } else if (!tipSelecionado)
