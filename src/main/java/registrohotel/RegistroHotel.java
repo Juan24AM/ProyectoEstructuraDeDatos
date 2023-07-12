@@ -5,7 +5,6 @@
 package registrohotel;
 
 import Interfaces.Acceder;
-import Interfaces.Admin;
 
 /**
  *
@@ -14,6 +13,8 @@ import Interfaces.Admin;
 public class RegistroHotel {
 
     public static void main(String[] args) {
-       
+       Acceder acceder = new Acceder();
+       acceder.setVisible(true);
+       acceder.setLocationRelativeTo(null);
     }
 }
