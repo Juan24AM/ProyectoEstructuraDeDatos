@@ -13,8 +13,10 @@ public class Acceder extends javax.swing.JFrame {
     String user = "admin";
     String password = "admin";
     
+    
     public Acceder() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

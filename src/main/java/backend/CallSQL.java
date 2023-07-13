@@ -52,40 +52,6 @@ public class CallSQL {
         e.printStackTrace();
     }
 }
-
-    public void actualizarRegistro(int id, String nombre, String apellidos, String dni, String ingreso, String salida, double pago, String descripcion, String habitacion, String tipo_cuarto) {
-        String query = "UPDATE registros_hotel SET nombre = ?, apellidos = ?, dni = ?, ingreso = ?, salida = ?, pago = ?, descripcion = ? , habitacion = ?, tipo_cuarto = ?, WHERE id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, nombre);
-            statement.setString(2, apellidos);
-            statement.setString(3, dni);
-            statement.setString(4, ingreso);
-            statement.setString(5, salida);
-            statement.setDouble(6, pago);
-            statement.setString(7, descripcion);
-            statement.setString(8, habitacion);
-            statement.setString(9, tipo_cuarto);
-            statement.setInt(10, id);
-            statement.executeUpdate();
-            System.out.println("Registro actualizado correctamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void eliminarRegistro(int id) {
-        String query = "DELETE FROM registros_hotel WHERE id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id);
-            statement.executeUpdate();
-            System.out.println("Registro eliminado correctamente.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Registro> obtenerRegistros() {
         List<Registro> registros = new ArrayList<>();
         String query = "SELECT * FROM registros_hotel";
@@ -128,6 +94,31 @@ public class CallSQL {
             System.out.println("Error al eliminar el registro: " + e.getMessage());
         }
     }
+    public Registro buscarRegistroPorDNI(String dni) {
+        String query = "SELECT * FROM registros_hotel WHERE dni = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, dni);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nombre = resultSet.getString("nombre");
+                String apellidos = resultSet.getString("apellidos");
+                String ingreso = resultSet.getString("ingreso");
+                String salida = resultSet.getString("salida");
+                double pago = resultSet.getDouble("pago");
+                String descripcion = resultSet.getString("descripcion");
+                String habitacion = resultSet.getString("habitacion");
+                String tipo_cuarto = resultSet.getString("tipo_cuarto");
+
+                return new Registro(id, nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
     public class Registro {

@@ -6,8 +6,7 @@ package Interfaces;
 
 import backend.CallSQL;
 import backend.ApiClienteV2;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import backend.CallSQL.Registro;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -24,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class Admin extends javax.swing.JFrame {
     CallSQL registroHotel;
     String habitacionSeleccionada;
+    
+    
     
     //Declaración del formato de la tabla
     DefaultTableModel miModelo;
@@ -43,6 +44,7 @@ public class Admin extends javax.swing.JFrame {
         jtaSalida.setModel(miModelo);
         cargarRegistros();
         agregarBotones();
+        setLocationRelativeTo(null);
 }
     void vaciar_tabla(){
         int filas=jtaSalida.getRowCount();
@@ -138,7 +140,6 @@ public class Admin extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jbl = new javax.swing.JButton();
         jbr = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jtDni = new javax.swing.JTextField();
@@ -165,10 +166,6 @@ public class Admin extends javax.swing.JFrame {
         jbBuscar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        jtFiltrarNombre = new javax.swing.JTextField();
-        jtFiltrarApellido = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
 
         jLabel12.setText("jLabel12");
 
@@ -183,8 +180,8 @@ public class Admin extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 190, 190));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/COLOR BASE.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 190, 190));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,9 +191,9 @@ public class Admin extends javax.swing.JFrame {
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("HOTELES");
+        jLabel6.setText("HOTEL");
         jLabel6.setFocusable(false);
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ah.jpeg"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 280, 600));
@@ -262,16 +259,6 @@ public class Admin extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registrar1.png"))); // NOI18N
         jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 19, -1, -1));
 
-        jbl.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/descarga.png"))); // NOI18N
-        jbl.setText("LIMPIAR");
-        jbl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jblActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 133, -1));
-
         jbr.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registrarusu.png"))); // NOI18N
         jbr.setText("REGISTRAR");
@@ -280,7 +267,7 @@ public class Admin extends javax.swing.JFrame {
                 jbrActionPerformed(evt);
             }
         });
-        jPanel5.add(jbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 490, -1, -1));
+        jPanel5.add(jbr, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel10.setText("Ingreso AAAA-MM-DD");
@@ -414,7 +401,12 @@ public class Admin extends javax.swing.JFrame {
         jbBuscar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
         jbBuscar.setText("BUSCAR");
-        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 520, 180, 50));
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, 180, 50));
 
         jbEliminar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminar.png"))); // NOI18N
@@ -424,42 +416,17 @@ public class Admin extends javax.swing.JFrame {
                 jbEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 520, 180, 50));
+        jPanel2.add(jbEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 180, 50));
 
         jbActualizar.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/editar.png"))); // NOI18N
         jbActualizar.setText("ACTUALIZAR");
-        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 180, 50));
-
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel11.setText("Filtar por nombre:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
-
-        jtFiltrarNombre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jtFiltrarNombre.setForeground(new java.awt.Color(102, 102, 102));
-        jtFiltrarNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtFiltrarNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jtFiltrarNombre.addActionListener(new java.awt.event.ActionListener() {
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtFiltrarNombreActionPerformed(evt);
+                jbActualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(jtFiltrarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 150, 20));
-
-        jtFiltrarApellido.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jtFiltrarApellido.setForeground(new java.awt.Color(102, 102, 102));
-        jtFiltrarApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtFiltrarApellido.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, null, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        jtFiltrarApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtFiltrarApellidoActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jtFiltrarApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 150, 20));
-
-        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel13.setText("Filtrar por apellido:");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, -1, -1));
+        jPanel2.add(jbActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 180, 50));
 
         jTabbedPane1.addTab("Datos", jPanel2);
 
@@ -518,10 +485,6 @@ public class Admin extends javax.swing.JFrame {
         buttonTipoCuarto.clearSelection();
     }
     
-    private void jblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblActionPerformed
-        limpiarEntradas();
-    }//GEN-LAST:event_jblActionPerformed
-
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtnomActionPerformed
@@ -533,14 +496,6 @@ public class Admin extends javax.swing.JFrame {
     private void jtxtapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtapeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtapeActionPerformed
-
-    private void jtFiltrarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtFiltrarNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtFiltrarNombreActionPerformed
-
-    private void jtFiltrarApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtFiltrarApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtFiltrarApellidoActionPerformed
 
     private void jtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDniActionPerformed
         // TODO add your handling code here:
@@ -653,6 +608,29 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtPagoActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        String dni = JOptionPane.showInputDialog(null, "Ingrese el DNI:");
+        CallSQL callSQL = new CallSQL();
+Registro registroEncontrado = callSQL.buscarRegistroPorDNI(dni);
+if (registroEncontrado != null) {
+    JOptionPane.showMessageDialog(this,"Nombre: " + registroEncontrado.getNombre() +
+            "\nApellidos: "+ registroEncontrado.getApellidos() +
+            "\nIngreso & Salida: " + registroEncontrado.getIngreso() + " - " + registroEncontrado.getSalida() +
+            "\nTipo de Cuarto: " + registroEncontrado.getTipo_cuarto() +
+            "\nPrecio: " + registroEncontrado.getPago() +
+            "\nDescripcion: " + registroEncontrado.getDescripcion() +
+            "\nNª Habitación: " + registroEncontrado.getHabitacion(), "Registro Encontrado " + registroEncontrado.getDni(), 1);
+        } else {
+        JOptionPane.showMessageDialog(this,"Registro no encontrado para el DNI: " + dni, "ERROR EN BUSQUEDA", 2);
+        }  
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"En desarrollo! :D", "Desarrollo", 1);
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,9 +679,7 @@ public class Admin extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateFechaSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -732,12 +708,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbl;
     private javax.swing.JButton jbr;
     private javax.swing.JTextField jtDes;
     private javax.swing.JTextField jtDni;
-    private javax.swing.JTextField jtFiltrarApellido;
-    private javax.swing.JTextField jtFiltrarNombre;
     private javax.swing.JTextField jtHabitacion;
     private javax.swing.JTextField jtPago;
     private javax.swing.JTable jtaSalida;
