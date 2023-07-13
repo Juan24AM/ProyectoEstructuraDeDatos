@@ -21,8 +21,8 @@ public class CallSQL {
     private String ip = "194.156.91.214";
     private int port = 3306;
     private String database = "registros_hotel";
-    private String username = "administracion@hotelucv";
-    private String password = "8j0&!Tp21#iO";
+    private String username = "admin@hotelucv";
+    private String password = "hotelucv@passwd";
 
     public CallSQL() {
         try {
@@ -116,7 +116,7 @@ public class CallSQL {
     public void eliminarRegistroPorDNI(String dni) {
         String sql = "DELETE FROM registros_hotel WHERE dni = ?";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://194.156.91.77:3306/registros_hotel", "hotel", "admin@hotel");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://194.156.91.214:3306/registros_hotel", "admin@hotelucv", "hotelucv@passwd");
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, dni);
