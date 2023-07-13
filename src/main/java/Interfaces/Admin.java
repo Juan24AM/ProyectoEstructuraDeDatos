@@ -471,10 +471,11 @@ public class Admin extends javax.swing.JFrame {
     private void jbrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbrActionPerformed
 
         agregarRegistro();
+        JOptionPane.showMessageDialog(this, "Registro hecho exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        limpiarEntrada();
     }//GEN-LAST:event_jbrActionPerformed
-
-    private void jblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblActionPerformed
-        // TODO add your handling code here:
+    
+    public void limpiarEntrada(){
         // Limpiar campos de texto
         jtxtnom.setText("");
         jtxtape.setText("");
@@ -487,6 +488,10 @@ public class Admin extends javax.swing.JFrame {
         jtxtnom.setEnabled(true);
         jtxtape.setEnabled(true);
         buttonTipoCuarto.clearSelection();
+    }
+    
+    private void jblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblActionPerformed
+        limpiarEntrada();
     }//GEN-LAST:event_jblActionPerformed
 
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
