@@ -94,30 +94,31 @@ public class CallSQL {
             System.out.println("Error al eliminar el registro: " + e.getMessage());
         }
     }
-    public Registro buscarRegistroPorDNI(String dni) {
-        String query = "SELECT * FROM registros_hotel WHERE dni = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, dni);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nombre = resultSet.getString("nombre");
-                String apellidos = resultSet.getString("apellidos");
-                String ingreso = resultSet.getString("ingreso");
-                String salida = resultSet.getString("salida");
-                double pago = resultSet.getDouble("pago");
-                String descripcion = resultSet.getString("descripcion");
-                String habitacion = resultSet.getString("habitacion");
-                String tipo_cuarto = resultSet.getString("tipo_cuarto");
+    public Registro buscarRegistroPorCuarto(String habitacion) {
+    String query = "SELECT * FROM registros_hotel WHERE habitacion = ?";
+    try {
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, habitacion);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nombre = resultSet.getString("nombre");
+            String apellidos = resultSet.getString("apellidos");
+            String dni = resultSet.getString("dni");
+            String ingreso = resultSet.getString("ingreso");
+            String salida = resultSet.getString("salida");
+            double pago = resultSet.getDouble("pago");
+            String descripcion = resultSet.getString("descripcion");
+            String tipo_cuarto = resultSet.getString("tipo_cuarto");
 
-                return new Registro(id, nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return new Registro(id, nombre, apellidos, dni, ingreso, salida, pago, descripcion, habitacion, tipo_cuarto);
         }
-        return null;
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+    return null;
+}
+
 
 
 

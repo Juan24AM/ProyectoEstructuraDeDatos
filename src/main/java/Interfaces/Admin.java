@@ -610,9 +610,9 @@ public class Admin extends javax.swing.JFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        String dni = JOptionPane.showInputDialog(null, "Ingrese el DNI:");
+        String cuarto = JOptionPane.showInputDialog(null, "Ingrese el cuarto:");
         CallSQL callSQL = new CallSQL();
-Registro registroEncontrado = callSQL.buscarRegistroPorDNI(dni);
+Registro registroEncontrado = callSQL.buscarRegistroPorCuarto(cuarto);
 if (registroEncontrado != null) {
     JOptionPane.showMessageDialog(this,"Nombre: " + registroEncontrado.getNombre() +
             "\nApellidos: "+ registroEncontrado.getApellidos() +
@@ -622,7 +622,7 @@ if (registroEncontrado != null) {
             "\nDescripcion: " + registroEncontrado.getDescripcion() +
             "\nNª Habitación: " + registroEncontrado.getHabitacion(), "Registro Encontrado " + registroEncontrado.getDni(), 1);
         } else {
-        JOptionPane.showMessageDialog(this,"Registro no encontrado para el DNI: " + dni, "ERROR EN BUSQUEDA", 2);
+        JOptionPane.showMessageDialog(this,"Registro no encontrado para el DNI: " + cuarto, "ERROR EN BUSQUEDA", 2);
         }  
     }//GEN-LAST:event_jbBuscarActionPerformed
 
