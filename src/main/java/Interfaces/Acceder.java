@@ -1,20 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Interfaces;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Daysuke
+ * @author juanp
  */
 public class Acceder extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Acceder
-     */
+    
+    String user = "admin";
+    String password = "admin";
+    
     public Acceder() {
         initComponents();
     }
@@ -204,10 +202,19 @@ public class Acceder extends javax.swing.JFrame {
         
         System.out.println(usuario + " " + contraseña);
         
-        Admin admin = new Admin();
-        admin.setVisible(true);
-        admin.setLocationRelativeTo(null);
-        dispose(); // Cerramos la ventana actual
+        if (usuario.equals(user)){
+            if (contraseña.equals(password)) {
+                Admin admin = new Admin();
+                admin.setVisible(true);
+                admin.setLocationRelativeTo(null);
+                dispose(); // Cerramos la ventana actual
+                JOptionPane.showMessageDialog(this, "Logeo Exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else
+                JOptionPane.showMessageDialog(this, "Contraseña Incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        } else
+            JOptionPane.showMessageDialog(this, "Este usuario no existe, por favor verifica.", "Error", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_jTextLoginMouseClicked
 
     private void jLabelInvitadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelInvitadoMouseClicked
