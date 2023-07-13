@@ -42,6 +42,7 @@ public class Acceder extends javax.swing.JFrame {
         jLabelInvitado = new javax.swing.JLabel();
         jPanelFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -144,11 +145,14 @@ public class Acceder extends javax.swing.JFrame {
         jPanelFondo.setBackground(new java.awt.Color(196, 68, 140));
         jPanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("HOTEL LA VENIDA");
-        jPanelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 180, 80));
+        jLabel1.setText("HOTEL UCV");
+        jPanelFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 180, 80));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/NEUTRO.png"))); // NOI18N
+        jPanelFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
         jPanel2.add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 500));
 
@@ -273,6 +277,7 @@ public class Acceder extends javax.swing.JFrame {
     private javax.swing.JPasswordField JContraseña;
     private javax.swing.JPanel jContainerLogin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelInvitado;
     private javax.swing.JLabel jLabelMensajeBienvenida;
     private javax.swing.JLabel jLabelTextContraseña;
