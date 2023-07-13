@@ -469,11 +469,39 @@ public class Admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbrActionPerformed
-
-        agregarRegistro();
-        JOptionPane.showMessageDialog(this, "Registro hecho exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        limpiarEntradas();
+        String campo = VerificaCampos();
+        if(campo.equals("")){
+            agregarRegistro();
+            JOptionPane.showMessageDialog(this, "Registro hecho exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarEntradas();
+        } else 
+            JOptionPane.showMessageDialog(null, "Verifique los datos en el campo de " + campo);
+        
     }//GEN-LAST:event_jbrActionPerformed
+    
+    String VerificaCampos() 
+    {
+        if(jtDni.getText().equals("") || jtDni.getText().length() >=11 || jtDni.getText().length() <=7)
+            return "DNI";
+        else if(jtxtnom.getText().equals(""))
+            return "Nombre";
+        else if(jtxtape.getText().equals(""))
+            return "Apellidos";
+        else if (jDateFechaIngreso.getDate() == null)
+            return "Fecha de ingreso";
+        else if (jDateFechaSalida.getDate() == null)
+            return "Fecha de salida";
+        else if(jtPago.getText().equals("") || jtPago.getText().contains("S/. ") )
+            return "Pago Total";
+        else if(jtDes.getText().equals(""))
+            return "Descripcion";
+        else if(jtHabitacion.getText().equals(""))
+            return "Habitacion";
+        
+        //Si todos los jText estan con datos, retornamos un texto vacio.
+        else
+            return "";
+    }
     
     public void limpiarEntradas(){
         // Limpiar campos de texto
