@@ -160,6 +160,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaSalida = new javax.swing.JTable();
@@ -372,6 +373,16 @@ public class Admin extends javax.swing.JFrame {
             }
         });
         jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/returnrefresh_87509 (1).png"))); // NOI18N
+        jButton3.setContentAreaFilled(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 530, 60, 50));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 600));
 
@@ -606,6 +617,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jtPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPagoActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtPagoActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -630,6 +642,14 @@ if (registroEncontrado != null) {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this,"En desarrollo! :D", "Desarrollo", 1);
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Acceder acceder = new Acceder();
+        acceder.setVisible(true);
+        dispose(); 
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -675,6 +695,7 @@ if (registroEncontrado != null) {
     private javax.swing.ButtonGroup buttonTipoCuarto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private com.toedter.calendar.JDateChooser jDateFechaIngreso;
     private com.toedter.calendar.JDateChooser jDateFechaSalida;
     private javax.swing.JLabel jLabel1;
