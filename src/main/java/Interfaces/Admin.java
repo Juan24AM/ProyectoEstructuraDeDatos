@@ -472,10 +472,10 @@ public class Admin extends javax.swing.JFrame {
 
         agregarRegistro();
         JOptionPane.showMessageDialog(this, "Registro hecho exitosamente!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        limpiarEntrada();
+        limpiarEntradas();
     }//GEN-LAST:event_jbrActionPerformed
     
-    public void limpiarEntrada(){
+    public void limpiarEntradas(){
         // Limpiar campos de texto
         jtxtnom.setText("");
         jtxtape.setText("");
@@ -491,7 +491,7 @@ public class Admin extends javax.swing.JFrame {
     }
     
     private void jblActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblActionPerformed
-        limpiarEntrada();
+        limpiarEntradas();
     }//GEN-LAST:event_jblActionPerformed
 
     private void jtxtnomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtnomActionPerformed
